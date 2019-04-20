@@ -7,7 +7,6 @@
     var color = "#ff2626";
     var nodeArray = [];
     var lineArray = [];
-    var textArray = [];
 
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -44,75 +43,22 @@
       }
       console.log(document.getElementsByTagName("input").length);
       var inputArray = document.getElementsByTagName("input");
-      var textArrayLen = textArray.length;
       for (var i = 0; i < inputArray.length; i++) {
         console.log(inputArray[i]);
-        for (var j = 0; j < textArray.length; j++) {
-          if (
-            textArray[i].x != inputArray[i].style.left &&
-            textArray[i].y != inputArray[i].style.top
-          ) {
-            textArray.push({
-              x: inputArray[i].style.left,
-              y: inputArray[i].style.top,
-              text: inputArray[i].value
-            });
-          }
-          inputArray[i].remove();
-        }
+        inputArray[i].remove();
       }
-      if (textArrayLen != textArray.length) {
-        redrawStuff();
-      }
-      // document.getElementsByTagName('input').forEach(element =>{
-      //   console.log(element)
-      // })
     });
-
-    //document.getElementById("canvas").addEventListener("auxclick ", e => {
-
-    // var rect = canvas.getBoundingClientRect();
-    // var x = event.clientX - rect.left;
-    // var y = event.clientY - rect.top;
-    // var ok = false;
-    // var selectedNode = null;
-    // for (var i = 0; i < nodeArray.length; i++) {
-    //   if (pointInCircle(x, y, nodeArray[i].x, nodeArray[i].y, size)) {
-    //     selectedNode =  nodeArray[i];
-    //     ok = true;
-    //   }
-    // }
-    // if(ok){
-    // var input = document.createElement("INPUT");
-    // input.setAttribute("type", "text");
-    // input.style.position = 'absolute';
-    // input.style.top = y - size/2;
-    // input.style.left = x - size/2;
-    // input.style.width = size;
-    // document.body.appendChild(input);
-    // }
-    //});
-
     document.getElementById("canvas").addEventListener("mousedown", (e) => {
       console.log(e);
       var rect = canvas.getBoundingClientRect();
       var x = event.clientX - rect.left;
       var y = event.clientY - rect.top;
-      // if (e.button == 1) {
-      //   var input = document.createElement("INPUT");
-      //   input.setAttribute("type", "text");
-      //   input.style.position = "absolute";
-      //   input.style.top = y - size / 2;
-      //   input.style.left = x - size / 2;
-      //   input.style.width = size;
-      //   document.body.appendChild(input);
-      // } else {
+
       for (var i = 0; i < nodeArray.length; i++) {
         if (pointInCircle(x, y, nodeArray[i].x, nodeArray[i].y, size)) {
           selectedGraphForMove = i;
         }
       }
-      // }
     });
     document.getElementById("canvas").addEventListener("mouseup", (e) => {
       selectedGraphForMove = null;
@@ -187,10 +133,6 @@
       });
       lineArray.forEach((element) => {
         drawLine(element.x1, element.y1, element.x2, element.y2);
-      });
-      textArray.forEach((element) => {
-        ctx.font = "30px Arial";
-        ctx.fillText(element.text, element.x, element.y);
       });
     }
 
@@ -268,21 +210,5 @@
       ctx.lineTo(x2, y2);
       ctx.stroke();
     }
-
-    // function compareObjects(obj1, obj2) {
-    //   var flag = true;
-
-    //   if (Object.keys(obj1).length == Object.keys(obj2).length) {
-    //     for (key in obj1) {
-    //       if (obj1[key] != obj2[key]) {
-    //         flag = false;
-    //         break;
-    //       }
-    //     }
-    //   } else {
-    //     flag = false;
-    //   }
-    //   return flag;
-    // }
   </script>
 </html>
