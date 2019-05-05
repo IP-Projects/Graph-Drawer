@@ -49,3 +49,7 @@ function compareObjects(obj1, obj2) {
   }
   return flag;
 }
+
+function checkNodeCollision(node, x, y, size) {
+  return Math.sqrt(Math.pow(node.x - x, 2) + Math.pow(node.y - y, 2)) < 2 * size;
+}
